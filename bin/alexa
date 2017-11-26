@@ -6,12 +6,12 @@
 
 'use strict';
 
-process.title = 'alexa';
+process.title = 'ghome';
 
 // Find the HomeBridge lib
-var path = require('path');
-var fs = require('fs');
-var lib = path.join(path.dirname(fs.realpathSync(__filename)), '../lib');
+const path = require('path');
+const fs = require('fs');
+const lib = path.join(path.dirname(fs.realpathSync(__filename)), '../lib');
 
 // Run HomeBridge
 require(lib + '/cli')();
