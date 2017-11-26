@@ -1,0 +1,269 @@
+<!--
+@license
+Copyright 2017, Google, Inc.
+Licensed under the Apache License, Version 2.0 (the 'License');
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an 'AS IS' BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/iron-icons/hardware-icons.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-slider/paper-slider.html">
+<link rel="import" href="../bower_components/paper-toggle-button/paper-toggle-button.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="smart-vacuum">
+    <template>
+        <style include="iron-flex iron-flex-alignment shared-styles">
+            paper-input {
+                padding-right: 4px;
+            }
+
+            paper-button {
+                height: 40px;
+                float: right;
+                margin-right: 0px;
+            }
+
+            iron-icon {
+                padding-top: 24px;
+                padding-bottom: 24px;
+                width: 128px;
+                height: 128px;
+            }
+
+            .card {
+                height: 390px;
+                width: 300px;
+            }
+
+            #button-bar {
+                margin-bottom: 8px;
+            }
+
+        </style>
+
+        <div class="card">
+            <div id="button-bar" class="layout horizontal justified">
+                <div id="vacuum-id" class="circle">[[vacuum.id]]</div>
+                <div class="flex"></div>
+                <paper-icon-button id="cloud" icon="cloud-off" on-tap="_handleCloud"></paper-icon-button>
+                <paper-icon-button icon="delete" on-tap="_handleDelete"></paper-icon-button>
+            </div>
+
+            <!-- vacuum icon -->
+            <div class="layout horizontal center-justified">
+                <iron-icon id="vacuum" icon="hardware:router" on-tap="_handleOnOff"></iron-icon>
+            </div>
+
+            <!-- controls -->
+            <paper-input id="nickname" label="Nickname" value$="{{vacuum.properties.name.nicknames.0}}"></paper-input>
+            <paper-input id="name" label="Name" value$="{{vacuum.properties.name.name}}"></paper-input>
+            <!-- <div>Default Name: {{vacuum.properties.name.defaultNames.0}}</div> -->
+        </div>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'smart-vacuum',
+
+            properties: {
+                vacuum: {
+                    type: Object,
+                    observer: '_vacuumChanged'
+                }
+            },
+
+            ready: function () {
+                this.$.nickname.addEventListener('keydown', this._handleNameOrNicknameChange.bind(this));
+                this.$.nickname.addEventListener('blur', this._execNameOrNicknameChange.bind(this));
+                this.$.name.addEventListener('keydown', this._handleNameOrNicknameChange.bind(this));
+                this.$.name.addEventListener('blur', this._execNameOrNicknameChange.bind(this));
+
+                this.async(() => {
+                    this._handleRegister();
+                });
+            },
+
+            _handleOnOff: function () {
+                this.vacuum.states.on = !this.vacuum.states.on;
+                this._notifyStateChange();
+            },
+
+            _handleCloud: function () {
+                // Toggle online state on button press.
+                this.vacuum.states.online = !this.vacuum.states.online;
+                this._handleRegister();
+                this._changeEventSource();
+            },
+
+            _handleRegister: function() {
+                // Register source if undefined
+                if (!this._source) {
+                    this._source = new EventSource(SMART_HOME_PROVIDER_CLOUD_ENDPOINT + '/device-connection/' + this.vacuum.id);
+                }
+                this._callSmartHomeProviderCloud('/register-device', 'POST', this.vacuum)
+                    .then(this._changeEventSource.bind(this))
+                    .catch(function (error) {
+                        console.log('>>> failed to register device with Smart Home Provider cloud:', error);
+                    });
+            },
+
+            _handleDelete: function () {
+                this.vacuum.states.online = true;
+                this._callSmartHomeProviderCloud('/remove-device', 'POST', this.vacuum)
+                    .then(this._changeEventSource.bind(this))
+                    .catch(function (error) {
+                        console.log('>>> failed to remove device with Smart Home Provider Cloud:', error);
+                    });
+                if (this._source) this._source.close();
+
+                const app = document.querySelector('my-app');
+                const vacuums = app.vacuums;
+                for (var i = 0; i < vacuums.length; i++) {
+                    if (vacuums[i].id == this.vacuum.id) {
+                        app.splice('vacuums', i, 1);
+                    }
+                }
+            },
+
+            _execNameOrNicknameChange: function (event) {
+                // occurs after enter/tab key pressed or on tapout from input field
+                if (event.target.id == 'nickname') {
+                    this.vacuum.properties.name.nicknames[0] = event.target.value;
+                }
+                else if (event.target.id == 'name') {
+                    this.vacuum.properties.name.name = event.target.value;
+                }
+                this._notifyStateChange(true);
+            },
+
+            _handleNameOrNicknameChange: function (event) {
+                if (event.which == ENTERKEY) this.blur();
+            },
+
+            _callSmartHomeProviderCloud: function (path, method, opt_body) {
+                const options = {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + AUTH_TOKEN
+                    }
+                };
+                if (opt_body) options.body = JSON.stringify(opt_body);
+                return fetch(SMART_HOME_PROVIDER_CLOUD_ENDPOINT + path, options);
+            },
+
+            _changeEventSource: function () {
+                console.log("vacuum", this.vacuum);
+                if (!this.vacuum.states.online) {
+                    if (this._source) {
+                        this._source.close();
+                    }
+                } else {
+                    // going online
+                    this._source = new EventSource(SMART_HOME_PROVIDER_CLOUD_ENDPOINT + '/device-connection/' + this.vacuum.id);
+                    this._source.addEventListener('change', function (e) {
+                        this._changeState(JSON.parse(e.data));
+                    }.bind(this));
+                    this._source.addEventListener('pullUp', function (e) {
+                        this._exec();
+                    }.bind(this));
+                    this._source.addEventListener('error', function (error) {
+                        if (error.eventPhase == 2) {
+                            console.log('>>> event source closed');
+                            return this._changeEventSource();
+                        } else {
+                            console.log('>>> error in event source:', error);
+                        }
+                    }.bind(this));
+                }
+                this._notifyStateChange();
+            },
+
+            _changeState: function (changes) {
+                if (!this.vacuum.states.online) {
+                    console.log("device offline, nothing changed");
+                } else {
+                    for (var name in changes) {
+                        if (name == "start") {
+                            this.vacuum.states.isRunning = changes[name];
+                            // starting off device -> turn it on and start it
+                            if (this.vacuum.states.isRunning) {
+                                this.vacuum.states.on = true;
+                            }
+                            // if a device has been started/stopped, it can't be paused
+                            this.vacuum.states.isPaused = false;
+                        } else if (name == "pause") {
+                            // else if still running and pausable, set isPaused to whatever is in changes                        
+                            if (this.vacuum.properties.attributes.pausable) {
+                                if (this.vacuum.states.isRunning || this.vacuum.states.isPaused) {
+                                    this.vacuum.states.isPaused = changes[name];
+                                    this.vacuum.states.isRunning = !changes[name];
+                                }
+                            } else this.vacuum.states.isRunning = false;
+                        } else {
+                            const value = changes[name];
+                            this.set('vacuum.states.' + name, value);
+                        }
+                    }
+                }
+                if (!this.vacuum.states.on) {
+                    // device off, stop everything
+                    this.vacuum.states.isRunning = false;
+                    this.vacuum.states.isPaused = false;
+                } 
+                this._notifyStateChange();
+            },
+
+            _notifyStateChange: function (isNameChange) {
+                this._vacuumChanged();
+                if (this.vacuum.states.online) this._exec(isNameChange);
+            },
+
+            _vacuumChanged: function () {
+                this.$.cloud.icon = this.vacuum.states.online ? 'cloud' : 'cloud-off';
+                if (this.vacuum.states.on) {
+                    this.$.vacuum.style.color = '#9bea00';
+                } else {
+                    this.$.vacuum.style.color = '#eee';
+                }
+            },
+
+            _exec: function(isNameChange) {
+                if (isNameChange) {
+                    this.vacuum.nameChanged = true;
+                } else {
+                    this.vacuum.nameChanged = false;
+                }
+                this._callSmartHomeProviderCloud('/exec', 'POST', this.vacuum).then(function () {
+                    console.log('>>> exec to Smart Home Provider Cloud', this.vacuum);
+                }).catch(function (error) {
+                    console.log('>>> failed to exec to Smart Home Provider Cloud:', error);
+                });
+            },
+
+            _pushUp: function (type) {
+                this._callSmartHomeProviderCloud('/pushUp', 'POST', {type: type, state: this.vacuum}).then(function () {
+                    console.log('>>> pushed state to Smart Home Provider Cloud', this.vacuum);
+                }).catch(function (error) {
+                    console.log('>>> failed to push state to Smart Home Provider Cloud:', error);
+                });
+            },
+        });
+
+    </script>
+</dom-module>
