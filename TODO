@@ -1,0 +1,51 @@
+
+- zurück mergen nach homebridge-fhem
+  Characteristic.Perms.WRITE und Characteristic.Units.PERCENTAGE -> REQUEST_SET_PERCENTAGE,REQUEST_INCREMENT_PERCENTAGE,REQUEST_DECREMENT_PERCENTAGE
+- handle events for DEFINED, DELETED, ATTR, ...
+- custom skill
+  wecker, antworten
+
+- indikator für steuerung über alexa (/anderes frontend) <-> automatische steuerung
+- kommandos nicht direkt, sondern über das alexa device absetzen? -> vorher flag setzen, nachher löschen
+- disabled/disabledForIntervals im alexa device
+- allowed einbauen?
+
+- NAT-UPNP fixen
+- NAT-PMP
+
+- proxy?
+
+- bei mehreren möglichen characteristics die passende anhand des value finden
+  intentOfValue oder indexOf auf valuesOfIntent
+
+- FIXME: nocache, use query() instead of cached()
+
+- fhemIntent
+  continue? in antwort
+
+- property bei kommandos mit einbauen
+  stelle die Helligkeit ...
+  stelle die Farbe ...
+  stelle die Sättigung ...
+  default property pro device
+
+frage
+ - nach bestimmter characteristic/property
+   welche <property> hat <article> <device> [[<preposition>] <room>]
+   wie [hoch] ist <article> [<property>] (<device>|<room>)
+ - nach status
+ - 'wie warm ist es im wohnzimmer', 'wie ist die temperatur im wohnzimmer',
+   'wie warm ist die heizung im wohnzimmer', 'welche temperatur ist im wohnzimmer'
+   'welche temperatur hat die heizung [im wohnzimmer]'
+
+mehrfach werte setzen:
+ - wecker mit wochentag und uhrzeit
+
+alexaConfirmationLevel=2,1,0
+  2 -> lang
+  1 -> ok
+  0 -> stumm (nur bei einmaligem aufruf)
+
+alexaStatusLevel=2,1
+  2 -> alle konfigurierten characteristics
+  1 -> nur die status characteristic
