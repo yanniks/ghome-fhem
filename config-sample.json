@@ -1,5 +1,5 @@
 {
-    "alexa": {
+    "ghome": {
         "port": 3000,
         "name": "Alexa TEST",
         "keyFile": "./key.pem",
@@ -13,10 +13,10 @@
     "connections": [
         {
             "name": "FHEM",
-            "server": "10.0.1.21",
+            "server": "10.0.0.102",
             "port": "8083",
-            "webname": "fhem",
-            "filter": "room=alexa"
+            "webname": "fhema",
+            "filter": "room=AlexaHomekit"
         }
     ]
 }
