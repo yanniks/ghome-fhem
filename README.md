@@ -7,7 +7,7 @@
     -> Passwort mindestens 4 stellen, alle Fragen beantworten
   <home>/.ghome/config.json anpassen (siehe config-sample.json)
     Bitte passt Benutzername und Passwort an, ersetzt auch die Werte von `oauthClientId`, `oauthClientSecret` und `authtoken`, gerne auch duch zufällig generierte Werte. So stellt ihr sicher, dass der Zugang für unbefugte Personen zumindest erschwert wird.
-  bin/alexa starten
+  bin/ghome starten
 
 2. Port 3000 von außen erreichbar machen
   *Hinweis*: Gestet habe ich das aktuell nur mit einem Load Balancer dazwischen, welcher ein gültiges SSL Zertifikat mit ausliefert. Es könnte also sein, dass Google mit selbst signierten Zertifikaten Probleme macht. Let's Encrypt stellt beispielsweise kostenlose Zertifikate aus.
