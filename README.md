@@ -1,86 +1,34 @@
 
-1. alexa-fhem installieren
-  alexa-fhem-0.0.0.tgz auspacken
-  package in alexa-fhem umbenennen
-  cd alexa-fhem
+1. ghome-fhem installieren
+  GitHub repo lokal auschecken
+  Im Ordner folgende Kommandos ausführen:
   npm install
   ssl zertifikat mit ./createKey.sh erzeugen.
-    -> password mindestens 4 stellen, alle fregen beantworten
-  <home>/.alexa/config.json anpassen (siehe config-sample.json)
-    client id -> (aus 3.1)
+    -> Passwort mindestens 4 stellen, alle Fragen beantworten
+  <home>/.ghome/config.json anpassen (siehe config-sample.json)
+    Bitte passt Benutzername und Passwort an, ersetzt auch die Werte von `oauthClientId`, `oauthClientSecret` und `authtoken`, gerne auch duch zufällig generierte Werte. So stellt ihr sicher, dass der Zugang für unbefugte Personen zumindest erschwert wird.
   bin/alexa starten
 
-2. port 3000 von aussen erreichbar machen
+2. Port 3000 von außen erreichbar machen
+  *Hinweis*: Gestet habe ich das aktuell nur mit einem Load Balancer dazwischen, welcher ein gültiges SSL Zertifikat mit ausliefert. Es könnte also sein, dass Google mit selbst signierten Zertifikaten Probleme macht. Let's Encrypt stellt beispielsweise kostenlose Zertifikate aus.
 
-3. alexa smart home skill anlegen
-  amazon developer account anlegen
-  bei developer.amazon.com anmelden
-  3.1 apps&services
-    security profiles
-      create a new security profile
-      [save]
-    login with amazon
-      profil von eben auswählen
-      consent url -> https://www.amazon.com/gp/help/customer/display.html?nodeId=468496
-    security profiles
-      web settings
-        allowed return urls -> https://layla.amazon.co.uk/api/skill/link/<xxx>
-                               https://pitangui.amazon.com/api/skill/link/<xxx>
-                               https://layla.amazon.com/api/skill/link/<xxx>
-          <xxx> aus 3.2 configuration -> account linking -> redirect urls
+3. Google Action erstellen
+  Folgender Anleitung folgen: https://developers.google.com/actions/sdk/create-a-project
+  Den Inhalt der action.json mit dem Inhalt der action-sample.json aus diesem Ordner ersetzen. `https://SERVICEURL` wird dabei durch die URL ersetzt, unter welcher der Dienst bei euch erreichbar ist.
 
-  3.2 alexa
-    alexa skills kit get started
-    add a new skill
-      skill information
-        type -> smart home skill api
-        language -> german
-        [next]
-        [next]
-      configuration
-        europe -> arn:aws:lambda... (aus 4.)
-        authorization url -> https://www.amazon.com/ap/oa
-        client id -> (aus 3.1)
-        scope -> profile:user_id
-        access token uri -> https://api.amazon.com/auth/o2/token
-        client secret -> (aus 3.1)
-        privacy policy url -> https://www.amazon.com/gp/help/customer/display.html?nodeId=468496
-        [next]
-      test
-        show this skill in the alexa app -> yes
-        [save]
+  3.2 OAuth Setup
+    Damit die Verbindung funktioniert, muss in der Actions on Google Konsole "Account linking" konfiguriert werden. Auf der Overview-Seite eures Assistenten wählt ihr dazu den sechsten Punkt, Account linking (optional), aus.
+	Wählt als Grant type "Authorization code" aus, Client ID und Client secret entsprechen den Werten, die in eurer `config.json` unter `oauthClientId` und `oauthClientSecret` stehen.
+	Fügt für die Authorization URL and die URL aus dem vorherigen Schritt "/oauth" an, sodass eine URL wie "https://SERVICEURL/oauth" entsteht. Für die Token URL gilt dasselbe Format.
+	Schreibt in die Testing instructions irgendwas rein und speichert die Einstellungen.
+  3.3 Simulator aktivieren
+    Im Menü links "Simulator" aktivieren. Im Menü oben lässt sich nun unter dem Icon, welches den Laptop und das Handy zeigt, "Testing on Device" aktivieren.
+	In der Google Home-App auf einem Smartphone oder Tablet lässt sich nun im Smart Home-Bereich ein neuer Gerätetyp hinzufügen. In der Liste aller Typen taucht jetzt auch euer eigener auf, er beginnt mit [test].
+	Eventuell müsst ihr euer Konto mehrmals verknüpfen, bei mir hat es nicht immer beim ersten mal geklappt.
 
-4. aws lambda funktion anlegen
-  aws.amazon.com account anlegen
-  an der aws konsole anmelden
-  lambda auswählen
-  rechts oben -> eu (ireland)
-  create lambda function
-    select blueprint
-      filter -> alexa -> 'alexa-smart-home-skill-adapter'
-    configure triggers
-      aplication id -> amzn1.ask.skil... (aus 3.2 Skill Information)
-      enable trigger -> ja
-      [next]
-    configure function
-      name -> FHEM
-      runtime -> Node.js 4.3
-      edit code inline -> lambda.js einfügen, hostname (mein.host.name) anpassen -> save
-      role -> Existing role
-      existing role-> service-role/myRoleName
-      [next]
-      [create function]
-
-5. http://alexa.amazon.de
-   -> skils -> meine skils (rechts oben) -> fhem skill hinzufügen -> mit eigenem amazon konto anmelden
-
-   “alexa, finde meine smarten geräte“
-     oder
-   -> smart home -> geräte suchen
-
-   optional: gruppen (räume) anlegen
-
-6. “alexa, schalte <gerät> ein”
-   “alexa, schalte <gerät> aus”
-   “alexa, stelle <gerät> auf <wert> prozent”
-   “alexa, stelle <gerät/raum> auf <anzahl> grad”
+6. “ok google, schalte <gerät> ein”
+   “ok google, schalte das Licht im Raum <raum> aus”
+   “ok google, stell die Temperatur in <raum> auf <wert> Grad”
+   “ok google, dimme das Licht in Raum <raum> auf <anzahl> Prozent”
+   “ok google, wie warm ist es in <raum>?“
+   “ok google, ist das Licht in <raum> an?“

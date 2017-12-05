@@ -6,8 +6,14 @@
         "certFile": "./cert.pem",
         "nat-pmp": "",
         "nat-upnp": false,
-        "applicationId": "amzn1.ask.skill.XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
-        "oauthClientID": "amzn1.application-oa2-client.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        "oauthClientId": "ghomeclientidentifier",
+		"oauthClientSecret": "MIIEpQIBAAKCAQEA19RjjLYEIw6hdTdmMc",
+		"oauthUsers": {
+			"username": {
+				"password": "changeme",
+				"authtoken": "1qSX1djjp7zux7dhRQMesUKA9gB2A61lFuqJN"
+			}
+		}
     },
     
     "connections": [

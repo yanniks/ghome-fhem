@@ -19,7 +19,7 @@ limitations under the License.
     <meta name="viewport"
           content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>Smart Home Provider</title>
+    <title>FHEM OAuth sign in</title>
     <meta name="description" content="Smart Home virtual devices">
 
     <link rel="icon" href="images/favicon.ico">
@@ -187,16 +187,8 @@ limitations under the License.
         }
     </style>
 
-    <app-header condenses reveals effects="waterfall">
-        <app-toolbar>
-            <paper-icon-button icon="home"></paper-icon-button>
-            <div main-title>Smart Home Provider</div>
-            <div>Welcome</div>
-        </app-toolbar>
-    </app-header>
-
     <div class='main'>
-        <h1>Link your devices to Google</h1>
+        <h1>Link your FHEM devices to Google assistant</h1>
         <img src='images/assistant-small.png' />
 
         <form action='/login' method='post' id='loginform'>
@@ -211,8 +203,8 @@ limitations under the License.
             <input type="hidden" name="client_id">
             <input type="hidden" name="redirect_uri">
             <input type="hidden" name="state" />
-            <input type="hidden" name="username">
-            <input type="hidden" name="password" />
+            <input type="text" name="username">
+            <input type="password" name="password" />
 
             <paper-button raised onclick="formSubmit()">Login</paper-button>
         </form>
@@ -243,8 +235,8 @@ limitations under the License.
             document.querySelector('[name="client_id"]').value = params.get('client_id');
             document.querySelector('[name="redirect_uri"]').value = params.get('redirect_uri');
             document.querySelector('[name="state"]').value = params.get('state');
-            document.querySelector('[name="username"]').value = document.querySelector('paper-input[name="paper_username"]').value;
-            document.querySelector('[name="password"]').value = document.querySelector('paper-input[name="paper_password"]').value;
+            //document.querySelector('[name="username"]').value = document.querySelector('paper-input[name="paper_username"]').value;
+            //document.querySelector('[name="password"]').value = document.querySelector('paper-input[name="paper_password"]').value;
             document.querySelector('#loginform').submit();
         }
     </script>
