@@ -24,7 +24,7 @@ ACHTUNG: in arbeit
 
 		Bitte passt Benutzername und Passwort an, ersetzt auch die Werte von `oauthClientId`, `oauthClientSecret` und `authtoken`, gerne auch duch zufällig generierte Werte. So stellt ihr sicher, dass der Zugang für unbefugte Personen zumindest erschwert wird.
 
-4. letsencrypt Zertifikat nach $HOME/ghome/ghome-fhem kopieren
+4. letsencrypt Zertifikat nach $HOME/ghome/ghome-fhem kopieren (/etc/letsencrypt/DOMAIN/privkey.pem => $HOME/ghome/ghome-fhem/key.pem, /etc/letsencrypt/DOMAIN/fullchain.pem => $HOME/ghome/ghome-fhem/cert.pem)
 
 5. Port 3000 von außen erreichbar machen
 
