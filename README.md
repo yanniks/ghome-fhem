@@ -23,6 +23,7 @@ ACHTUNG: in arbeit
 5. Port 3000 von außen erreichbar machen
 
 6. Google Action erstellen
+
   Folgender Anleitung folgen: https://developers.google.com/actions/sdk/create-a-project
   Den Inhalt der action.json mit dem Inhalt der action-sample.json aus diesem Ordner ersetzen. `https://SERVICEURL` wird dabei durch die URL ersetzt, unter welcher der Dienst bei euch erreichbar ist.
 
@@ -39,9 +40,16 @@ Im Menü links "Simulator" aktivieren. Im Menü oben lässt sich nun unter dem I
 	In der Google Home-App auf einem Smartphone oder Tablet lässt sich nun im Smart Home-Bereich ein neuer Gerätetyp hinzufügen. In der Liste aller Typen taucht jetzt auch euer eigener auf, er beginnt mit [test].
 	Eventuell müsst ihr euer Konto mehrmals verknüpfen, bei mir hat es nicht immer beim ersten mal geklappt.
 
-7. “ok google, schalte <gerät> ein”
-   “ok google, schalte das Licht im Raum <raum> aus”
-   “ok google, stell die Temperatur in <raum> auf <wert> Grad”
-   “ok google, dimme das Licht in Raum <raum> auf <anzahl> Prozent”
-   “ok google, wie warm ist es in <raum>?“
-   “ok google, ist das Licht in <raum> an?“
+7. Mögliche Kommandos...
+
+“ok google, schalte <gerät> ein”
+
+“ok google, schalte das Licht im Raum <raum> aus”
+
+“ok google, stell die Temperatur in <raum> auf <wert> Grad”
+
+“ok google, dimme das Licht in Raum <raum> auf <anzahl> Prozent”
+
+“ok google, wie warm ist es in <raum>?“
+
+“ok google, ist das Licht in <raum> an?“
