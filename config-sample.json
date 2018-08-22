@@ -1,7 +1,7 @@
 {
     "ghome": {
         "port": 3000,
-        "name": "Alexa TEST",
+        "name": "GHome",
         "keyFile": "./key.pem",
         "certFile": "./cert.pem",
         "nat-pmp": "",
