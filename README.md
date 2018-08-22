@@ -9,20 +9,27 @@ ACHTUNG: in arbeit
 	b. certbot ausführen
 
 3. ghome-fhem installieren
-  GitHub repo lokal auschecken ($HOME/ghome)
-  Im Ordner folgende Kommandos ausführen:
-  npm install
-  ssl zertifikat mit ./createKey.sh erzeugen.
-    -> Passwort mindestens 4 stellen, alle Fragen beantworten
-  <home>/.ghome/config.json anpassen (siehe config-sample.json)
-    Bitte passt Benutzername und Passwort an, ersetzt auch die Werte von `oauthClientId`, `oauthClientSecret` und `authtoken`, gerne auch duch zufällig generierte Werte. So stellt ihr sicher, dass der Zugang für unbefugte Personen zumindest erschwert wird.
-  bin/ghome starten
+a. GitHub repo lokal auschecken ($HOME/ghome)
+
+b. Im Ordner folgende Kommandos ausführen:
+
+npm install
+
+ssl zertifikat mit ./createKey.sh erzeugen -> Passwort mindestens 4 stellen, alle Fragen beantworten
+
+c. config.json anpassen
+
+<home>/.ghome/config.json anpassen (siehe config-sample.json)
+
+Bitte passt Benutzername und Passwort an, ersetzt auch die Werte von `oauthClientId`, `oauthClientSecret` und `authtoken`, gerne auch duch zufällig generierte Werte. So stellt ihr sicher, dass der Zugang für unbefugte Personen zumindest erschwert wird.
 
 4. letsencrypt Zertifikat nach $HOME/ghome/ghome-fhem kopieren
 
 5. Port 3000 von außen erreichbar machen
 
-6. Google Action erstellen
+6. bin/ghome starten
+
+7. Google Action erstellen
 
   Folgender Anleitung folgen: https://developers.google.com/actions/sdk/create-a-project
   Den Inhalt der action.json mit dem Inhalt der action-sample.json aus diesem Ordner ersetzen. `https://SERVICEURL` wird dabei durch die URL ersetzt, unter welcher der Dienst bei euch erreichbar ist.
@@ -40,7 +47,7 @@ Im Menü links "Simulator" aktivieren. Im Menü oben lässt sich nun unter dem I
 	In der Google Home-App auf einem Smartphone oder Tablet lässt sich nun im Smart Home-Bereich ein neuer Gerätetyp hinzufügen. In der Liste aller Typen taucht jetzt auch euer eigener auf, er beginnt mit [test].
 	Eventuell müsst ihr euer Konto mehrmals verknüpfen, bei mir hat es nicht immer beim ersten mal geklappt.
 
-7. Mögliche Kommandos...
+8. Mögliche Kommandos...
 
 “ok google, schalte <gerät> ein”
 
