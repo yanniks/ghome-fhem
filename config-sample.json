@@ -6,12 +6,12 @@
         "certFile": "./cert.pem",
         "nat-pmp": "",
         "nat-upnp": false,
-        "oauthClientId": "ghomeclientidentifier",
-		"oauthClientSecret": "MIIEpQIBAAKCAQEA19RjjLYEIw6hdTdmMc",
+        "oauthClientId": "CHANGEME-ghomeclientidentifier",
+		"oauthClientSecret": "CHANGEME-MIIEpQIBAAKCAQEA19RjjLYEIw6hdTdmMc",
 		"oauthUsers": {
-			"username": {
-				"password": "changeme",
-				"authtoken": "1qSX1djjp7zux7dhRQMesUKA9gB2A61lFuqJN"
+			"CHANGEME-username": {
+				"password": "CHANGEME-password",
+				"authtoken": "CHANGEME-1qSX1djjp7zux7dhRQMesUKA9gB2A61lFuqJN"
 			}
 		}
     },
@@ -19,10 +19,10 @@
     "connections": [
         {
             "name": "FHEM",
-            "server": "10.0.0.102",
+            "server": "127.0.0.1",
             "port": "8083",
             "webname": "fhema",
-            "filter": "room=AlexaHomekit"
+            "filter": "room=GHome"
         }
     ]
 }
