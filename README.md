@@ -1,5 +1,10 @@
+ACHTUNG: in arbeit
 
-1. ghome-fhem installieren
+1. ddnss.de Host registrieren wenn man noch keine Domain hat
+2. letsencrypt Zertifikat für diesen Host erstellen
+	a. Port 80 auf RPi weiterleiten
+	b. certbot ausführen
+3. ghome-fhem installieren
   GitHub repo lokal auschecken
   Im Ordner folgende Kommandos ausführen:
   npm install
