@@ -1,6 +1,6 @@
-# Google Home/Assistent FHEM Connector
+# Google Home/Assistant FHEM Connector
 
-ghome-fhem verbindet FHEM mit Google Assistent und erlaubt dadurch die Nutzung der FHEM Geräte in Verbindung mit jedem Google Assistent fähigem Gerät. Dies ist ein Fork des ursprünglich von yanniks bereitgestellten Repositories. Ein großes Danke für seine Entwicklung!
+ghome-fhem verbindet FHEM mit Google Assistant und erlaubt dadurch die Nutzung der FHEM Geräte in Verbindung mit jedem Google Assistant fähigem Gerät. Dies ist ein Fork des ursprünglich von yanniks bereitgestellten Repositories. Ein großes Danke für seine Entwicklung!
 
 ## Domain registrieren z.B. bei ddnss.de (gratis)
 1. Account bei ddnss.de anlegen
