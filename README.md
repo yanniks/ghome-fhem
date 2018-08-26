@@ -64,7 +64,7 @@ sudo cp /etc/letsencrypt/DOMAIN/privkey.pem $HOME/ghome/ghome-fhem/key.pem
 sudo cp /etc/letsencrypt/DOMAIN/fullchain.pem $HOME/ghome/ghome-fhem/cert.pem
 ```
 
-5. Port 3000 von außen erreichbar machen
+5. Port 443 (extern) auf 3000 (intern, auf das Gerät wo ghome läuft) weiterleiten
 
 6. bin/ghome starten
 
