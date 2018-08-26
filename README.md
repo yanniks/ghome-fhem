@@ -1,6 +1,7 @@
 ACHTUNG: in arbeit
 
 1. gratis ddnss.de Host registrieren wenn man noch keine Domain hat
+
 	a. Account bei ddnss.de anlegen
 
 	b. Autoupdate der IP einrichten
