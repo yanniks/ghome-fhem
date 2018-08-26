@@ -112,8 +112,14 @@ action.json
   "locale": "de"
 }
 ```
-8. gaction ausführen
+8. gactions ausführen
+
+Download von hier: https://developers.google.com/actions/tools/gactions-cli
+In diesem Codeblock wird die ARM Version mit wget heruntergeladen.
 ```
+cd $HOME/ghome/ghome-fhem
+wget -c https://dl.google.com/gactions/updates/bin/linux/arm/gactions
+chmod +x gactions
 gactions update --action_package action.json --project FHEM-Connector
 ```
 ## Google Home App einrichten
