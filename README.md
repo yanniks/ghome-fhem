@@ -17,10 +17,9 @@ letsencrypt Zertifikat für diesen Host erstellen (unbedingt notwendig, ohne gü
 
 ## ghome-fhem installieren
 1. GitHub repo lokal auschecken ($HOME/ghome)
-2. Im Ordner folgende Kommandos ausführen:
+2. Im Ordner folgendes Kommando ausführen:
 ```
 npm install
-ssl zertifikat mit ./createKey.sh erzeugen -> Passwort mindestens 4 stellen, alle Fragen beantworten
 ```
 3. config.json anpassen
 
