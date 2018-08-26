@@ -68,9 +68,26 @@ Bitte passt Benutzername (CHANGEMEusername) und Passwort (password) an, ersetzt 
 
 6. bin/ghome starten
 
-7. Google Action erstellen
+## Google Action Projekt erstellen
 
-Folgender Anleitung folgen: https://developers.google.com/actions/sdk/create-a-project
+1. https://console.actions.google.com/ Add/import project auswählen
+2. Projektname FHEM-Connector
+3. Home Control auswählen
+4. Smart home auswählen
+5. Overview - Quick Setup
+   - Name your Smart Home action: FHEM Connector
+   - Add account linking
+     - Account creation: No, I only want to allow account creation on my website
+     - Linking type: OAuth, Authorization code
+     - Client information: ClientID (oauthClientId) und ClientSecret (oauthClientSecret) aus der config.json verwenden
+     - Client information: Authorization URL (https://CHANGEME.ddnss.de/oauth), Token URL (https://CHANGEME.ddnss.de/token)
+     - Testing instructions: "Schalte das Licht ein" eintragen
+6. Overview - Build your Action
+   - Add Action
+     - Create smart home action: URL https://CHANGEME.ddnss.de
+   - Test Actions in the simulator
+     - Testing rechts oben aktivieren, wenn nicht automatisch passiert
+7. action.json
 
 Den Inhalt der action.json mit dem Inhalt der action-sample.json aus diesem Ordner ersetzen. `https://SERVICEURL` wird dabei durch die URL ersetzt, unter welcher der Dienst bei euch erreichbar ist.
 action.json
@@ -95,26 +112,16 @@ action.json
   "locale": "de"
 }
 ```
+8. gaction ausführen
 
-  - OAuth Setup
-  
-  Damit die Verbindung funktioniert, muss in der Actions on Google Konsole "Account linking" konfiguriert werden. Auf der Overview-Seite eures Assistenten wählt ihr dazu den sechsten Punkt, Account linking (optional), aus.
-  
-  Wählt als Grant type "Authorization code" aus, Client ID und Client secret entsprechen den Werten, die in eurer `config.json` unter `oauthClientId` und `oauthClientSecret` stehen.
-  
-  Fügt für die Authorization URL and die URL aus dem vorherigen Schritt "/oauth" an, sodass eine URL wie "https://SERVICEURL/oauth" entsteht. Für die Token URL gilt dasselbe Format.
-  
-  Schreibt in die Testing instructions irgendwas rein und speichert die Einstellungen.
-	
-   - Simulator aktivieren
-	
-   Im Menü links "Simulator" aktivieren. Im Menü oben lässt sich nun unter dem Icon, welches den Laptop und das Handy zeigt, "Testing on Device" aktivieren.
-   
-   In der Google Home-App auf einem Smartphone oder Tablet lässt sich nun im Smart Home-Bereich ein neuer Gerätetyp hinzufügen. In der Liste aller Typen taucht jetzt auch euer eigener auf, er beginnt mit [test].
-   
-   Eventuell müsst ihr euer Konto mehrmals verknüpfen, bei mir hat es nicht immer beim ersten mal geklappt.
+gactions update --action_package PACKAGE_NAME --project PROJECT_NAME
 
-8. Mögliche Kommandos...
+## Google Home App einrichten
+In der Google Home-App auf einem Smartphone oder Tablet lässt sich nun im Smart Home-Bereich ein neuer Gerätetyp hinzufügen. In der Liste aller Typen taucht jetzt auch euer eigener auf, er beginnt mit [test].
+   
+Eventuell müsst ihr euer Konto mehrmals verknüpfen, bei mir hat es nicht immer beim ersten mal geklappt.
+
+## Mögliche Kommandos
 * “ok google, schalte <gerät> ein”
 * “ok google, schalte das Licht im Raum <raum> aus”
 * “ok google, stell die Temperatur in <raum> auf <wert> Grad”
