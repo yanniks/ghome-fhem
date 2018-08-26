@@ -113,9 +113,9 @@ action.json
 }
 ```
 8. gaction ausführen
-
-gactions update --action_package PACKAGE_NAME --project PROJECT_NAME
-
+```
+gactions update --action_package action.json --project FHEM-Connector
+```
 ## Google Home App einrichten
 In der Google Home-App auf einem Smartphone oder Tablet lässt sich nun im Smart Home-Bereich ein neuer Gerätetyp hinzufügen. In der Liste aller Typen taucht jetzt auch euer eigener auf, er beginnt mit [test].
    
