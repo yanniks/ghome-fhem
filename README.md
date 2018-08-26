@@ -1,6 +1,13 @@
 ACHTUNG: in arbeit
 
 1. gratis ddnss.de Host registrieren wenn man noch keine Domain hat
+	a. Account bei ddnss.de anlegen
+
+	b. Autoupdate der IP einrichten
+	
+	sudo crontab -e
+	
+	39 * * * * /usr/bin/wget -q -O - "https://ddnss.de/upd.php?key=CHANGEME&host=CHANGEME.ddnss.de"
 
 2. letsencrypt Zertifikat für diesen Host erstellen (unbedingt notwendig, ohne gültiges Zertifikat geht nichts!)
 
