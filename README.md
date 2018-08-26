@@ -68,6 +68,24 @@ sudo cp /etc/letsencrypt/DOMAIN/fullchain.pem $HOME/ghome/ghome-fhem/cert.pem
 
 6. bin/ghome starten
 
+systemd Konfiguration (optional)
+```
+[Unit]
+Description=Google Assistant FHEM Connector
+After=network-online.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/ghome/ghome-fhem
+ExecStart=/home/pi/ghome/ghome-fhem/bin/ghome
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+Alias=ghome.service
+```
+
 ## Google Action Projekt erstellen
 
 1. https://console.actions.google.com/ Add/import project auswählen
