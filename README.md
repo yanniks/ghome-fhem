@@ -24,7 +24,7 @@ ssl zertifikat mit ./createKey.sh erzeugen -> Passwort mindestens 4 stellen, all
 ```
 3. config.json anpassen
 
-<home>/.ghome/config.json anpassen (siehe config-sample.json)
+$HOME/.ghome/config.json anpassen (siehe config-sample.json)
 	
 Bitte passt Benutzername und Passwort an, ersetzt auch die Werte von `oauthClientId`, `oauthClientSecret` und `authtoken`, gerne auch duch zufällig generierte Werte. So stellt ihr sicher, dass der Zugang für unbefugte Personen zumindest erschwert wird.
 
