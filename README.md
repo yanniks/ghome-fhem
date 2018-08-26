@@ -14,6 +14,8 @@ ghome-fhem verbindet FHEM mit Google Assistant und erlaubt dadurch die Nutzung d
 letsencrypt Zertifikat für diesen Host erstellen (unbedingt notwendig, ohne gültiges Zertifikat geht nichts!)
 1. Port 80 auf RPi weiterleiten
 2. certbot ausführen
+3. Port 80 Weiterleitung entfernen
+4. Bei jedem Zertifikatsrenew (certbot renew) muss Port 80 wieder weitergeleitet werden (alle 3 Monate)
 
 ## ghome-fhem installieren
 1. GitHub repo lokal auschecken ($HOME/ghome)
