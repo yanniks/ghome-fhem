@@ -24,9 +24,39 @@ ssl zertifikat mit ./createKey.sh erzeugen -> Passwort mindestens 4 stellen, all
 ```
 3. config.json anpassen
 
-$HOME/.ghome/config.json anpassen (siehe config-sample.json)
+$HOME/.ghome/config.json anpassen
+```
+{
+    "ghome": {
+        "port": 3000,
+        "name": "Google Home",
+        "keyFile": "./key.pem",
+        "certFile": "./cert.pem",
+        "nat-pmp": "",
+        "nat-upnp": false,
+        "oauthClientId": "CHANGEME34567890asdf45678asdf5678asdf",
+                "oauthClientSecret": "CHANGEME567897654345678ghjaskdfhg456",
+                "oauthUsers": {
+                        "CHANGMEusername": {
+                                "password": "CHANGEME456789645678dfizh28gasdf",
+                                "authtoken": "CHANGEME768782935487zuaisdpfhgu987g23d"
+                        }
+                }
+    },
+    
+    "connections": [
+        {
+            "name": "FHEM",
+            "server": "127.0.0.1",
+            "port": "8083",
+            "webname": "fhem",
+            "filter": "room=GoogleHome"
+        }
+    ]
+}
+```
 	
-Bitte passt Benutzername und Passwort an, ersetzt auch die Werte von `oauthClientId`, `oauthClientSecret` und `authtoken`, gerne auch duch zufällig generierte Werte. So stellt ihr sicher, dass der Zugang für unbefugte Personen zumindest erschwert wird.
+Bitte passt Benutzername (CHANGEMEusername) und Passwort (password) an, ersetzt auch die Werte von `oauthClientId`, `oauthClientSecret` und `authtoken`, gerne auch duch zufällig generierte Werte. So stellt ihr sicher, dass der Zugang für unbefugte Personen zumindest erschwert wird.
 
 4. letsencrypt Zertifikat kopieren
 
@@ -43,6 +73,28 @@ Bitte passt Benutzername und Passwort an, ersetzt auch die Werte von `oauthClien
 Folgender Anleitung folgen: https://developers.google.com/actions/sdk/create-a-project
 
 Den Inhalt der action.json mit dem Inhalt der action-sample.json aus diesem Ordner ersetzen. `https://SERVICEURL` wird dabei durch die URL ersetzt, unter welcher der Dienst bei euch erreichbar ist.
+action.json
+```
+{
+  "actions": [
+          {
+              "name": "actions.devices",
+              "deviceControl": {
+              },
+              "fulfillment": {
+                "conversationName": "automation"
+              }
+    }
+  ],
+  "conversations": {
+    "automation": {
+      "name": "automation",
+      "url": "https://CHANGEME.ddnss.de"
+    }
+  },
+  "locale": "de"
+}
+```
 
   - OAuth Setup
   
