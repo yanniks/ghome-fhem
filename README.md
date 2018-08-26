@@ -115,6 +115,7 @@ action.json
 8. gactions ausführen
 
 Download von hier: https://developers.google.com/actions/tools/gactions-cli
+
 In diesem Codeblock wird die ARM Version mit wget heruntergeladen.
 ```
 cd $HOME/ghome/ghome-fhem
