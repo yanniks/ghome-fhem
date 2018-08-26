@@ -83,7 +83,7 @@ Bitte passt Benutzername (CHANGEMEusername) und Passwort (password) an, ersetzt 
      - Client information: Authorization URL (https://CHANGEME.ddnss.de/oauth), Token URL (https://CHANGEME.ddnss.de/token)
      - Testing instructions: "Schalte das Licht ein" eintragen
 6. Overview - Build your Action
-   - Add Action
+   - Add Action - Add your first Action
      - Create smart home action: URL https://CHANGEME.ddnss.de
    - Test Actions in the simulator
      - Testing rechts oben aktivieren, wenn nicht automatisch passiert
