@@ -1,26 +1,3 @@
-<  REVIEW   COMMENTS   >
-
-Ein paar Gedankengänge zu meinen Änderungen
-
-- Google Home kann unabhängig von den Installation im Raspberry gemacht werden. Für den Fall, dass es "zwischendrin" geamcht wird ist es ein Bruch im Prozess. Wenn bei Fragen weniger "begabte" Leute halbfertige Raspberry Settings belassen verursacht das ggf. woanders Probleme. Eine halbfertige Actions bei Google beinflusst FHEM nicht. 
-
-- Ich selber habe ein Setupscript für mich. Ich pulle es nicht da sonst das Forum mit Fragen überläuft. Wenn du es für dich haben willst ... gerne
-
-- Namen der Variablen habe ich mit Klammern < > kenntlich gemacht, hoffe dass es dann klarer ist, dass hier was ersetzt werden soll. Bin selber drüber gefallen und habe ein "CHANGEME" übersehen
-
-- Habe die Sample-Files für config und action identisch zum Text hochgeladen. Dann müssen nur noch Variablen erstetzt werden
-
-- systemd ... optional rausgenommen. Linux Experten wissen wie man eine Executible startet. Unerfahrene User sollen hier den Dienst in den Autostart reinhaun und gut ist
-
-- Habe die Ordnerstruktur in der Installationsdoku geändert. Name des Git ist "ghome-fhem". Bin der Meinung, ein zusätzlicher Ordner "ghome" parallel zum versteckten Ordner ".ghome" verwirrt. Wenn versteckte Ordner nicht angezeigt wird ist die Gefahr groß dass hier in den falschen Ordner kopiert wird.
-
-- Kopie der Zertifikate auch in Ordner .ghome, dann sind alle Config- und individuellen Filen in einem Ordner. Absoluter Pfad in der config.json damit werden die Zertifikate auch gefunden, wenn der Anwender ghome aus einem Verzeichnis unglich Home-Verzeichnis aufruft.
-
-- Ich musste "global userattr genericDeviceType" von Hand anlegen. So gewollt?
-
-- Im Log zu ghome ist die Meldung "[FHEM] no ghome device found. please define it.". Gibt es dazu ein Modul? Oder sollte die Prüfung beim Start entfernt werden?
-
-
 # Google Home/Assistant FHEM Connector
 
 ghome-fhem verbindet FHEM mit Google Assistant und erlaubt dadurch die Nutzung der FHEM Geräte in Verbindung mit jedem Google Assistant fähigem Gerät. Dies ist ein Fork des ursprünglich von yanniks bereitgestellten Repositories. Ein großes Danke für seine Entwicklung!
