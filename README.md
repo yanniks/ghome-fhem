@@ -393,8 +393,10 @@ In der Google Home-App auf einem Smartphone oder Tablet lässt sich nun im Smart
 Eventuell müsst ihr euer Konto mehrmals verknüpfen, bei mir hat es nicht immer beim ersten mal geklappt.
 
 Login 
+
 <change_me___oauthUser>
-<change_me___password>|
+
+<change_me___password>
 
 Accounts now linked.
 
