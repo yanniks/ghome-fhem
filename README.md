@@ -272,7 +272,7 @@ In der config.json müssen dann die Zeilen "keyFile" und "certFile" angepasst we
 
 <<<< A L T E R N A T I V--Z U--4   ----   E N D E >>>>
 
-5. Frontend mit folgendem Befehlen installieren
+5. Frontend mit folgenden Befehlen installieren
 
 ```
 cd smart-home-provider/frontend
