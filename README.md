@@ -275,7 +275,7 @@ In der config.json müssen dann die Zeilen "keyFile" und "certFile" angepasst we
 5. Frontend mit folgenden Befehlen installieren
 
 ```
-cd smart-home-provider/frontend
+cd $HOME/ghome-fhem/frontend
 npm install -g bower
 bower install
 cd ..
