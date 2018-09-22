@@ -276,7 +276,7 @@ In der config.json müssen dann die Zeilen "keyFile" und "certFile" angepasst we
 
 ```
 cd $HOME/ghome-fhem/frontend
-npm install -g bower
+sudo npm install -g bower
 bower install
 cd ..
 ```
