@@ -272,10 +272,18 @@ In der config.json müssen dann die Zeilen "keyFile" und "certFile" angepasst we
 
 <<<< A L T E R N A T I V--Z U--4   ----   E N D E >>>>
 
+5. Frontend mit folgenden Befehlen installieren
 
-5. Port 443 (extern) auf 3000 (intern, auf Raspberry oder Server) weiterleiten. Auch das muss wieder am Router gemacht werden. Hier ist zu beachten, dass sich externer und interner Port unterscheidet.
+```
+cd $HOME/ghome-fhem/frontend
+sudo npm install -g bower
+bower install
+cd ..
+```
 
-6. Systemd Dienst einrichten
+6. Port 443 (extern) auf 3000 (intern, auf Raspberry oder Server) weiterleiten. Auch das muss wieder am Router gemacht werden. Hier ist zu beachten, dass sich externer und interner Port unterscheidet.
+
+7. Systemd Dienst einrichten
 
 ```
 cd $HOME
