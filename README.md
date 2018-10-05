@@ -1,6 +1,6 @@
 # Google Home/Assistant FHEM Connector
 
-ghome-fhem verbindet FHEM mit Google Assistant und erlaubt dadurch die Nutzung der FHEM Geräte in Verbindung mit jedem Google Assistant fähigem Gerät. Dies ist ein Fork des ursprünglich von yanniks bereitgestellten Repositories. Ein großes Danke für seine Entwicklung!
+ghome-fhem ist ein eigenständig gestartetes Programm, das eine vom Google-Assistant aufgerufenen Webschnittstelle bereitstellt und die darüber empfangenen Befehle in natürlicher Sprache als fhem Befehle an fhem weiterleitet. Es ermöglicht damit die Nutzung der FHEM Geräte in Verbindung mit jedem Google Assistant fähigem Gerät (Google Home, Handy mit Google Assistant, Smartwatch mit WearOS, usw.). Dies ist ein Fork des ursprünglich von yanniks bereitgestellten Repositories. Ein großes Danke für seine Entwicklung!
 
 ## Vorbereitende Arbeiten
 
@@ -20,11 +20,11 @@ sudo curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 sudo apt-get -qq install nodejs
 ```
 
-3. Ein (Test)-Gerät in Fhem anlegen
-In FHEM ein Gerät dem Google Home Raum zuordnen
+3. Ein (Test)-Gerät in Fhem dem GoogleHome Raum hinzufügen
+In FHEM ein Gerät dem Google Home Raum zuordnen. Über den Raum erfolgt später die Filterung der von ghome-fhem angesteuerten Geräte. Es werden nur Geräte erkannt, die diesem Raum (GoogleHome) zugeordnet sind. 
 
 ```
-attr Office room GoogleHome
+attr Kaffeemaschine room GoogleHome
 ```
 
 userattr genericDeviceType in FHEM anlegen
@@ -35,8 +35,10 @@ attr global userattr genericDeviceType:security,ignore,switch,outlet,light,blind
 den zu schaltenden Devices das Attribut genericDeviceType zuordnen
 
 ```
-attr Office genericDeviceType switch
+attr Kaffeemaschine genericDeviceType switch
 ```
+
+Die Geräte können über den Devicename, den im alias Attribut definierten Namen oder einem in der Google Home App hinterlegten Spitznamen bei der Steuerung verwendet werden. Ich empfehle hier das alias Attribut zu verwenden und nicht die Spitznamen in der Google Home App. Das erspart Arbeit wenn man die Geräte einmal komplett neu synchronisiert.
 
 
 
@@ -410,6 +412,7 @@ Accounts now linked.
 
 
 ## Mögliche Kommandos
+* "ok google, synchronisiere meine Geräte" - Damit werden neu hinzugefügte Geräte in Google Assistant erkannt.
 * “ok google, schalte <gerät> ein”
 * “ok google, schalte das Licht im Raum <raum> aus”
 * “ok google, stell die Temperatur in <raum> auf <wert> Grad”
