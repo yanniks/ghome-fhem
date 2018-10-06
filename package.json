@@ -1,13 +1,13 @@
 {
   "private": true,
-  "name": "alexa-fhem",
-  "version": "0.3.4",
-  "description": "a fhem skill for amazon alexa",
-  "author": "justme-1968",
+  "name": "ghome-fhem",
+  "version": "0.4.0",
+  "description": "a google assistant fhem connector",
+  "author": "dominikkarall",
   "license": "ISC",
   "keywords": [
-    "alexa",
-    "skill",
+    "google assistant",
+    "google home",
     "fhem"
   ],
   "dependencies": {
