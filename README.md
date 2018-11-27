@@ -363,7 +363,7 @@ In diesem Codeblock wird die ARM Version (Raspberry) mit wget heruntergeladen.
 <change_me_project_ID> ist der technische Name der Action bei Google. Letze Seite im Word Dokument (doc/Google_Actions.docx)
 ```
 cd $HOME/.ghome
-wget -c https://dl.google.com/gactions/updates/bin/linux/arm/gactions/gactions
+wget -c https://dl.google.com/gactions/updates/bin/linux/arm/gactions
 chmod +x gactions
 ./gactions update --action_package action.json --project <change_me__google_project_ID>
 ```
