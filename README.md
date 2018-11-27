@@ -20,7 +20,7 @@ sudo curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 sudo apt-get -qq install nodejs
 ```
 
-3. Ein (Test)-Gerät in Fhem dem GoogleHome Raum hinzufügen
+3. Ein (Test)-Gerät in Fhem (>= Version 5.9!!!) dem GoogleHome Raum hinzufügen
 In FHEM ein Gerät dem Google Home Raum zuordnen. Über den Raum erfolgt später die Filterung der von ghome-fhem angesteuerten Geräte. Es werden nur Geräte erkannt, die diesem Raum (GoogleHome) zugeordnet sind. 
 
 ```
