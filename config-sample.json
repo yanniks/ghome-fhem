@@ -2,6 +2,7 @@
     "ghome": {
         "port": 3000,
         "name": "Google Home",
+        "ssl": true,
         "keyFile": "/home/pi/.ghome/key.pem",
         "certFile": "/home/pi/.ghome/cert.pem",
         "nat-pmp": "",
