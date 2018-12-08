@@ -1,18 +1,19 @@
 {
   "actions": [
-	  {
-	      "name": "actions.devices",
-	      "deviceControl": {
-	      },
-	      "fulfillment": {
-	        "conversationName": "automation"
-	      }
+          {
+              "name": "actions.devices",
+              "deviceControl": {
+              },
+              "fulfillment": {
+                "conversationName": "automation"
+              }
     }
   ],
   "conversations": {
     "automation": {
       "name": "automation",
-      "url": "https://SERVICEURL"
+      "url": "<change_me__domainname>"
     }
-  }
+  },
+  "locale": "de"
 }

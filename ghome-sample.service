@@ -1,0 +1,14 @@
+[Unit]
+Description=Google Assistant FHEM Connector
+After=network-online.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/ghome-fhem
+ExecStart=/home/pi/ghome-fhem/bin/ghome
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+Alias=ghome.service
